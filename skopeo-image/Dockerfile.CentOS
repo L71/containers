@@ -2,10 +2,9 @@ FROM centos:8
 RUN dnf install -y skopeo \
   && dnf clean all
 
-# CA cert
-RUN curl -o /etc/pki/ca-trust/source/anchors/home_CA.crt \
-  http://nfs1.home.lan/minio/software/home_CA/home_CA.crt \
-  && update-ca-trust
+# CA certs - copy file and update cert DB
+COPY *.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
 
 CMD ["--help"]
 ENTRYPOINT ["/usr/bin/skopeo"]

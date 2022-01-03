@@ -1,0 +1,15 @@
+# Image to run skopeo where it's not easily installed.
+#  $ docker build -t skopeo-alpine -f Dockerfile.Alpine .
+#  $ docker run --rm skopeo-alpine inspect docker://nfs1.home.lan:5000/skopeo-alpine:latest
+ 
+FROM alpine:3
+RUN apk add curl skopeo
+
+# CA cert - retrieve file and update cert DB
+RUN curl -o /usr/local/share/ca-certificates/home_CA.crt \
+  http://nfs1.home.lan/minio/software/home_CA/home_CA.crt \
+  && update-ca-certificates
+
+# default: run with --help when no other argument specified 
+CMD ["--help"]
+ENTRYPOINT ["/usr/bin/skopeo"]

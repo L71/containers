@@ -1,0 +1,3 @@
+# don't include CA cert in the repo.
+*.crt
+

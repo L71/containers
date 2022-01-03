@@ -10,11 +10,13 @@ URL=${1%/}
 images=$( curl --insecure -s -X GET "${URL}/v2/_catalog" | jq -r '.repositories | .[]' | sort )
 
 for image in $images ; do
-    echo "${image}" 
     tags=$( curl --insecure -s -X GET "${URL}/v2/${image}/tags/list" | jq -r '.tags | .[]' | sort )
-    for tag in $tags ; do
-        echo "  ${URL#*//}/$image:$tag"
-    done
-    echo
+    if [ $tags != "" ]; then
+        echo "${image}"
+        for tag in $tags ; do
+            echo "  ${URL#*//}/$image:$tag"
+        done
+        echo
+    fi
 done
 

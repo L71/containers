@@ -10,8 +10,11 @@ URL=${1%/}
 images=$( curl --insecure -s -X GET "${URL}/v2/_catalog" | jq -r '.repositories | .[]' | sort )
 
 for image in $images ; do
-    tags=$( curl --insecure -s -X GET "${URL}/v2/${image}/tags/list" | jq -r '.tags | .[]' | sort )
-    if [ $tags != "" ]; then
+    # if jq can extract a tag list then print this. if not, skip this image.
+    curl --insecure -s -X GET "${URL}/v2/${image}/tags/list" | jq -r '.tags | .[]' 1>/tmp/taglist 2>/dev/null
+    rc=$?
+    if [ $rc == 0 ]; then
+	tags=$( cat /tmp/taglist | sort )
         echo "${image}"
         for tag in $tags ; do
             echo "  ${URL#*//}/$image:$tag"
@@ -19,4 +22,3 @@ for image in $images ; do
         echo
     fi
 done
-

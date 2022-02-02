@@ -26,6 +26,7 @@ services:
       vpcbr:
         ipv4_address: 10.5.55.55
 
+  # squid container: https://hub.docker.com/r/ubuntu/squid  
   squid:
     container_name: squid
     image: ubuntu/squid:latest
@@ -49,4 +50,3 @@ networks:
       driver: default
       config:
         - subnet: 10.5.55.0/16
-          # gateway: 10.5.55.1

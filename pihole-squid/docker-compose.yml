@@ -9,7 +9,7 @@ services:
       # - "53:53/tcp"
       # - "53:53/udp"
       # - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "80:80/tcp"
+      - "8128:80/tcp"
     environment:
       TZ: 'UTC'
       WEBPASSWORD: 'letmeIN1233333'
@@ -31,7 +31,7 @@ services:
     container_name: squid
     image: ubuntu/squid:latest
     ports:
-      - "8080:8080/tcp"
+      - "3128:3128/tcp"
     environment:
       TZ: 'UTC'
     volumes:

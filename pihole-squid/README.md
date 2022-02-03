@@ -5,6 +5,6 @@ This docker-compose setup provides a squid proxy paired with a pihole DNS blocke
 The squid config file is in etc-squid/squid.conf and points the squid proxy DNS to the pihole container. 
 
 
-The pihole management interface is exposed on port 80. \
-The squid proxy can be accessed by browser clients on port 8080.
+The pihole management interface is exposed on port 8128. \
+The squid proxy can be accessed by browser clients on the squid default port 3128.
 

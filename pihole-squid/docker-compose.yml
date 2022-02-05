@@ -31,13 +31,14 @@ services:
   # squid container: https://hub.docker.com/r/ubuntu/squid  
   squid:
     container_name: squid
-    image: ubuntu/squid:latest
+    # image: ubuntu/squid:latest
+    image: squid-alpine:latest
     ports:
       - "3128:3128/tcp"
     environment:
       TZ: 'UTC'
     volumes:
-      - './etc-squid:/etc/squid'
+      - './etc-squid/squid.conf:/etc/squid/squid.conf'
 #      - './squid-logs:/var/log/squid'
 #      - './squid-data:/var/spool/squid'
     restart: unless-stopped

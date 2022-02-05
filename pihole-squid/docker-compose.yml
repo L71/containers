@@ -14,6 +14,7 @@ services:
       TZ: 'UTC'
       # WEBPASSWORD: 'set a secure password here or it will be random'
     # Volumes store your data between container upgrades
+      PIHOLE_DNS_: '1.1.1.1;1.0.0.1'
       DNS_BOGUS_PRIV: 'true'
       DNS_FQDN_REQUIRED: 'true'
     volumes:

@@ -14,6 +14,8 @@ services:
       TZ: 'UTC'
       # WEBPASSWORD: 'set a secure password here or it will be random'
     # Volumes store your data between container upgrades
+      DNS_BOGUS_PRIV: 'true'
+      DNS_FQDN_REQUIRED: 'true'
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'    
@@ -23,7 +25,7 @@ services:
     restart: unless-stopped
     networks:
       vpcbr:
-        ipv4_address: 10.5.55.55
+        ipv4_address: 10.55.55.2
 
   # squid container: https://hub.docker.com/r/ubuntu/squid  
   squid:
@@ -40,7 +42,7 @@ services:
     restart: unless-stopped
     networks:
       vpcbr:
-        ipv4_address: 10.5.55.56
+        ipv4_address: 10.55.55.3
 
 networks:
   vpcbr:
@@ -48,4 +50,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 10.5.55.0/16
+        - subnet: 10.55.55.0/28

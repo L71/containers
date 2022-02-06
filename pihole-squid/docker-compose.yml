@@ -1,8 +1,7 @@
 version: "3"
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
+  pihole: # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
     container_name: pihole
     image: pihole/pihole:latest
     ports:
@@ -23,10 +22,9 @@ services:
       vpcbr:
         ipv4_address: 10.55.55.2
 
-  # squid container: https://hub.docker.com/r/ubuntu/squid  
-  squid:
+  squid: 
     container_name: squid
-    image: ubuntu/squid:latest
+    image: ubuntu/squid:latest # https://hub.docker.com/r/ubuntu/squid
     # image: squid-alpine:latest
     ports:
       - "3128:3128/tcp"

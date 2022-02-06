@@ -6,23 +6,18 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     ports:
-      # - "53:53/tcp"
-      # - "53:53/udp"
-      # - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
       - "8128:80/tcp"
     environment:
       TZ: 'UTC'
+      # see the github link above for info about these settings
       # WEBPASSWORD: 'set a secure password here or it will be random'
-    # Volumes store your data between container upgrades
       PIHOLE_DNS_: '1.1.1.1;1.0.0.1'
       DNS_BOGUS_PRIV: 'true'
       DNS_FQDN_REQUIRED: 'true'
+    # Volumes store your data between container upgrades
     volumes:
       - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'    
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    # cap_add:
-    #  - NET_ADMIN # Recommended but not required (DHCP needs NET_ADMIN)      
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'         
     restart: unless-stopped
     networks:
       vpcbr:
@@ -31,16 +26,14 @@ services:
   # squid container: https://hub.docker.com/r/ubuntu/squid  
   squid:
     container_name: squid
-    # image: ubuntu/squid:latest
-    image: squid-alpine:latest
+    image: ubuntu/squid:latest
+    # image: squid-alpine:latest
     ports:
       - "3128:3128/tcp"
     environment:
       TZ: 'UTC'
     volumes:
       - './etc-squid/squid.conf:/etc/squid/squid.conf'
-#      - './squid-logs:/var/log/squid'
-#      - './squid-data:/var/spool/squid'
     restart: unless-stopped
     networks:
       vpcbr:
@@ -52,4 +45,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 10.55.55.0/28
+        - subnet: 10.55.55.0/29

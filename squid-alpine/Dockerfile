@@ -13,6 +13,8 @@ RUN apk add openrc squid \
   && rc-update add squid \
   && sed -i 's|^tty.*|# &|' /etc/inittab
 
+COPY squid.conf /etc/squid/squid.conf
+
 EXPOSE 3128
 
 CMD /sbin/init

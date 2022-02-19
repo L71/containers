@@ -22,10 +22,11 @@ services:
       vpcbr:
         ipv4_address: 10.55.55.2
 
-  squid: 
+  squid:
+    depends_on:
+      - pihole
     container_name: squid
     image: ubuntu/squid:latest # https://hub.docker.com/r/ubuntu/squid
-    # image: squid-alpine:latest
     ports:
       - "3128:3128/tcp"
     environment:

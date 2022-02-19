@@ -8,6 +8,7 @@ The Pi-hole web management interface is exposed on port 8128. \
 The squid proxy can be accessed by browser clients on the squid default port 3128.
 
 By default there is a random password for the pihole admin login generated at deploy time, you can reset it by running the pihole password change command in the Pi-hole container after deploying it:
+
 `docker exec -it pihole pihole -a -p`
 
 The password can also be set directly in the docker-compose.yml file.

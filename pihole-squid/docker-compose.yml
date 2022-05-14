@@ -20,7 +20,7 @@ services:
       - './etc-dnsmasq.d:/etc/dnsmasq.d'         
     restart: unless-stopped
     networks:
-      vpcbr:
+      piholebridge:
         ipv4_address: 10.55.55.2
 
   squid:
@@ -36,11 +36,11 @@ services:
       - './etc-squid/squid.conf:/etc/squid/squid.conf'
     restart: unless-stopped
     networks:
-      vpcbr:
+      piholebridge:
         ipv4_address: 10.55.55.3
 
 networks:
-  vpcbr:
+  piholebridge:
     driver: bridge
     ipam:
       driver: default

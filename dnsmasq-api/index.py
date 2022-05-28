@@ -29,7 +29,7 @@ def parse_leases() :
         ts_localtime = asctime(localtime(int(ts)))
         ts_utctime = asctime(gmtime(int(ts)))
 
-        leases[ip] = { "ip": ip, "mac": mac, "hostname": hostname, "time": ts, "time_local": ts_localtime, "time_utc": ts_utctime } 
+        leases[ip] = { "ip": ip, "mac": mac, "hostname": hostname, "expires": ts, "expires_local": ts_localtime, "expires_utc": ts_utctime } 
 
         for network in networks :
             if ip_network(ip).subnet_of(network) :

@@ -1,0 +1,18 @@
+version: "3"
+services:
+  dnsmasq-api:
+    container_name: dnsmasq-api
+    image: dnsmasq-api:latest
+    ports:
+      - "5000:5000/tcp"
+    environment:
+      TZ: 'UTC'
+    volumes:
+      - "./dnsmasq-data:/data:ro"     
+    restart: unless-stopped
+    networks:
+      dnsmasq-br:
+
+networks:
+  dnsmasq-br:
+    driver: bridge

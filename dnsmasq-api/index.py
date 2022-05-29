@@ -81,5 +81,5 @@ def by_mac(mac):
 if __name__ == '__main__':
     networks = cidrs_to_networks(cidrs)
     # print(networks)
-    app.run(debug=True, host="0.0.0.0")
+    app.run(host="0.0.0.0")
     

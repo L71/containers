@@ -80,6 +80,6 @@ def by_mac(mac):
 
 if __name__ == '__main__':
     networks = cidrs_to_networks(cidrs)
-    # print(networks)
+    app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True  # always pretty-print json
     app.run(host="0.0.0.0")
     

@@ -2,13 +2,18 @@
 from flask import Flask, jsonify, make_response
 from time import asctime, localtime, gmtime
 from ipaddress import ip_network
+import os
 
 app = Flask(__name__)
 
 leasefile = "data/dnsmasq.leases"
 
 # will match leases with this network
-cidrs =["192.168.0.0/24", "192.168.1.0/24", "192.168.2.0/24"]
+if "MATCH_NETWORKS" in os.environ :
+    match_networks = os.environ["MATCH_NETWORKS"]
+    cidrs = match_networks.split()
+else :
+    cidrs =["0.0.0.0/0"]
 
 # network CIDR list to network objects
 def cidrs_to_networks(cidrs) :

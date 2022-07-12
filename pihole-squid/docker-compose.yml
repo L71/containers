@@ -3,6 +3,7 @@ version: "3"
 services:
   pihole: # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
     container_name: pihole
+    hostname: pihole-squid
     image: pihole/pihole:latest
     ports:
       - "8128:80/tcp"

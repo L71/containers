@@ -95,6 +95,15 @@ def exact_name(hostname):
 
 # search MAC address (does substring matching, not case sensitive)
 # no separate exact function needed; no risk of ambiguity if a full MAC address is asked for.
+@app.route('/dnsmasq/api/v1.0/exact/mac/<mac>', methods=['GET'])
+def exact_mac(mac):
+    matches = []
+    leases = parse_leases()
+    for host in leases :
+        if mac.lower() == host["mac"].lower() :
+            matches.append(host)
+    return(jsonify(matches))
+
 @app.route('/dnsmasq/api/v1.0/search/mac/<mac>', methods=['GET'])
 def search_mac(mac):
     matches = []

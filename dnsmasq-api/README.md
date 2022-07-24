@@ -26,14 +26,6 @@ The code expects the dnsmasq.leases file to be available in $PWD/data
 
 `/dnsmasq/api/v1.0/leases` return full lease list
 
-`/dnsmasq/api/v1.0/search/name/<hostname>` return exact match of host names
-
-`/dnsmasq/api/v1.0/exact/name/<hostname>` search host name
-
-`/dnsmasq/api/v1.0/search/mac/<mac address>` return substring matched MAC adresses
-
-`/dnsmasq/api/v1.0/search/ip/<ip address>` return substring matched IP addresses
-
-`/dnsmasq/api/v1.0/exact/ip/<ip address>` return exact IP match
+`/dnsmasq/api/v1.0/[search|exact]/[name|ip|mac]/<searchstring>` returns either a substring match or the exact match for `searchstring` in hostname, ip address or MAC address of the DHCP client. In all cases matching is done ignoring case and returns lower-case results.
 
  

@@ -1,6 +1,6 @@
 # docker build -t dnsmasq-api -f Dockerfile .
 # 
-FROM python:3.8-alpine
+FROM python:3.10-alpine
 # install stuff
 RUN apk add -U py3-virtualenv \ 
     && virtualenv flask \

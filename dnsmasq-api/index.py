@@ -54,8 +54,8 @@ def index():
     return jsonify(parse_leases())
 
 # by IP address (does substring matching)
-@app.route('/dnsmasq/api/v1.0/leases/by-ip/<ipaddress>', methods=['GET'])
-def by_ip(ipaddress):
+@app.route('/dnsmasq/api/v1.0/search/ip/<ipaddress>', methods=['GET'])
+def search_ip(ipaddress):
     matches = []
     leases = parse_leases()
     for host in leases :
@@ -63,9 +63,29 @@ def by_ip(ipaddress):
             matches.append(host)
     return(jsonify(matches))
 
+# by IP address (exact)
+@app.route('/dnsmasq/api/v1.0/exact/ip/<ipaddress>', methods=['GET'])
+def exact_ip(ipaddress):
+    matches = []
+    leases = parse_leases()
+    for host in leases :
+        if ipaddress == host["ip"] :
+            matches.append(host)
+    return(jsonify(matches))
+
+# by hostname (substring search, not case sensitive)
+@app.route('/dnsmasq/api/v1.0/search/name/<hostname>', methods=['GET'])
+def search_name(hostname):
+    matches = []
+    leases = parse_leases()
+    for host in leases :
+        if hostname.lower() in host["hostname"].lower() :
+            matches.append(host)
+    return(jsonify(matches))
+
 # by hostname (exact matching, not case sensitive)
-@app.route('/dnsmasq/api/v1.0/leases/by-name/<hostname>', methods=['GET'])
-def by_name(hostname):
+@app.route('/dnsmasq/api/v1.0/exact/name/<hostname>', methods=['GET'])
+def exact_name(hostname):
     matches = []
     leases = parse_leases()
     for host in leases :
@@ -73,13 +93,14 @@ def by_name(hostname):
             matches.append(host)
     return(jsonify(matches))
 
-# by MAC address (does substring matching)
-@app.route('/dnsmasq/api/v1.0/leases/by-mac/<mac>', methods=['GET'])
-def by_mac(mac):
+# search MAC address (does substring matching, not case sensitive)
+# no separate exact function needed; no risk of ambiguity if a full MAC address is asked for.
+@app.route('/dnsmasq/api/v1.0/search/mac/<mac>', methods=['GET'])
+def search_mac(mac):
     matches = []
     leases = parse_leases()
     for host in leases :
-        if mac in host["mac"] :
+        if mac.lower() in host["mac"].lower() :
             matches.append(host)
     return(jsonify(matches))
 

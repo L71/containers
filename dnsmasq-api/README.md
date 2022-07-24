@@ -5,7 +5,7 @@ Presenting the dnsmasq lease lists via a rest API using Flask
 
 NOTE about running Flask this way: https://flask.palletsprojects.com/en/2.1.x/cli/#run-the-development-server 
 
-Required: Python (3.8 tested) with virtualenv:s 
+Required: Python3 (3.8 and 3.10 used here) with virtualenv:s 
 
 Setup & run for test:
 

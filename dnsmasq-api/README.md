@@ -47,7 +47,7 @@ The return result (when successful) will be a list of DHCP lease entries. No res
         }
     ]
 
-Troing to access a non-existing endpoint will return a not found error.
+Trying to access a non-existing endpoint will return a not found error on the output and HTTP status 404.
 
     {
         "error": "Not found"

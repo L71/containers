@@ -9,7 +9,7 @@ services:
       TZ: 'UTC'
       MATCH_NETWORKS: "192.168.0.0/24 192.168.1.0/24 192.168.2.0/24"
     volumes:
-      - "/path/tp/dnsmasq.leases:/data/dnsmasq.leases:ro"     
+      - "/path/to/dnsmasq.leases:/data/dnsmasq.leases:ro"     
     restart: unless-stopped
     networks:
       dnsmasq-br:

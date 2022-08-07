@@ -28,4 +28,28 @@ The code expects the dnsmasq.leases file to be available in $PWD/data
 
 `/dnsmasq/api/v1.0/[search|exact]/[name|ip|mac]/<searchstring>` returns either a substring match or the exact match for `searchstring` in hostname, ip address or MAC address of the DHCP client. In all cases matching is done ignoring case and returns lower-case results.
 
- 
+## output format
+
+The return result (when successful) will be a list of DHCP lease entries. No result found will return an empty list: `[]`
+
+    [
+        {
+            "expires": "1659894551",
+            "expires_local": "Sun Aug  7 19:49:11 2022",
+            "expires_utc": "Sun Aug  7 17:49:11 2022",
+            "hostname": "hostname",
+            "ip": "192.168.0.100",
+            "mac": "XX:XX:XX:XX:XX:XX",
+            "network": "192.168.0.0/24"
+        }
+        {
+            ... next entry (if any)
+        }
+    ]
+
+Troing to access a non-existing endpoint will return a not found error.
+
+    {
+        "error": "Not found"
+    }
+
